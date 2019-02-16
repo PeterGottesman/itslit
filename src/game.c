@@ -5,11 +5,8 @@
 void gameloop(void)
 {
     SDL_Surface *surf = SDL_GetWindowSurface(window);
-    SDL_Rect rect;
     struct timespec before, after;
     int loopCount = 0;
-    size_t x, y, i, num_alive;
-    Uint32 color = 0;
     while (1)
     {
     	if(clock_gettime(CLOCK_MONOTONIC, &before) == -1)
@@ -20,14 +17,15 @@ void gameloop(void)
         SDL_Event e;
         if (SDL_PollEvent(&e))
         {
-            if (e.type == SDL_QUIT)
+            if (e.type == SDL_QUIT ||
+		(e.type == SDL_KEYDOWN && SDL_GetKeyFromScancode(SDLK_q)))
             {
                 break;
             }
         }
         SDL_FillRect(surf,
                      NULL,
-                     0x000000);
+                     BACKGROUND_COLOR);
 
 	// update window surface
 	
