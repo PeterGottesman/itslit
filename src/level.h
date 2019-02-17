@@ -16,7 +16,9 @@ typedef struct light_source {
 typedef struct level {
     const char* level_name;
     struct placeable* placeables;
+    int num_placeables;
     struct light_source* light_sources;
+    int num_light_sources;
 } level_t;
 
 level_t* load_level(const char* filename);
