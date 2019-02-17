@@ -1,5 +1,7 @@
 #pragma once
 
+#define RENDERABLE_SIZE 30
+
 #define WIDTH 720
 #define HEIGHT 480
 

@@ -1,5 +1,6 @@
 #include "SDL2/SDL.h"
 #include "game.h"
+#include "level.h"
 
 void endfunc(void)
 {
@@ -20,7 +21,8 @@ int main(int argc, char *argv[])
     init_game(&state);
 
     // Init here
-
+    state.cur_level = load_level("./sample_level.txt");
+    
     gameloop(state);
 
     SDL_DestroyWindow(state.window);
