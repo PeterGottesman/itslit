@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "defs.h"
+#include <stdbool.h>
 
 point_t* cast_ray(float x_src, float y_src, float x_dest, float y_dest) {
     float dx = x_dest - x_src;
@@ -85,4 +86,8 @@ point_t* edge_ray(point_t* point) {
     edge_rays[1] = right_ray;
 
     return edge_rays;
+}
+
+bool has_collided(int top_right_x, int top_right_y, int ray_x, int ray_y) {
+    return ray_x >= top_right_x && ray_x <= top_right_x + RENDERABLE_SIZE && ray_y >= top_right_y && ray_y <= top_right_y + RENDERABLE_SIZE;
 }
