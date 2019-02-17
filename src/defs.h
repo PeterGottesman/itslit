@@ -9,3 +9,5 @@
 #define BACKGROUND_A 0xff
 
 #define TARGET_FPS 60
+
+#define PI 3.14159265358979323846

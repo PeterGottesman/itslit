@@ -63,3 +63,27 @@ point_t* sort_points(point_t* points, int n) {
     }
     return points;
 }
+
+point_t* egde_ray(point_t* point) {
+    float r = sqrt(point->x*point->x + point->y*point->y);
+
+    float left_angle = (point->angle - 0.00001)*(180/PI);
+    float left_x = r * cos(left_angle);
+    float left_y = r * sin(left_angle);
+    point_t left_ray;
+    left_ray.x = left_x;
+    left_ray.y = left_y;
+    
+    float right_angle = (point->angle + 0.00001) * (180/PI);
+    float right_x = r * cos(right_angle);
+    float right_y = r * sin(right_angle);
+    point_t right_ray;
+    right_ray.x = right_x;
+    right_ray.y = right_y;
+
+    point_t* edge_rays = malloc(sizeof(point_t)*2);
+    edge_rays[0] = left_ray;
+    edge_rays[1] = right_ray;
+
+    return edge_rays;
+}
