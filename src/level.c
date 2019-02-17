@@ -1,4 +1,5 @@
 #include "level.h"
+#include "defs.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -40,8 +41,8 @@ level_t* load_level(const char* filename) {
     for (int i = 0; i < placeable_count; ++i) {
         placeable_t placeable;
         fgets(line, 100, fp);
-        level->placeables[i].x = -1;
-        level->placeables[i].y = -1;
+        level->placeables[i].x = i * (RENDERABLE_SIZE+10) + 10;
+        level->placeables[i].y = HEIGHT-RENDERABLE_SIZE-5;
         level->placeables[i].shape = SQUARE;
     }
 
