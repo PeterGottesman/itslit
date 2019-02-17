@@ -1,5 +1,7 @@
 #include "level.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 level_t* load_level(const char* filename) {
     level_t* level = malloc(sizeof(level_t));
