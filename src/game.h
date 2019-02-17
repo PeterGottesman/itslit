@@ -4,4 +4,13 @@
 #include <time.h>
 #include "SDL2/SDL.h"
 
-void gameloop(void);
+struct gamestate
+{
+    int playing;
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+    // level_t cur_level;
+};
+
+void init_game(struct gamestate *state);
+void gameloop(struct gamestate state);

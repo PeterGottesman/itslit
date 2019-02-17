@@ -1,10 +1,20 @@
 #include <unistd.h>
+#include "defs.h"
+#include "ui.h"
 #include "game.h"
-#include "window.h"
 
-void gameloop(void)
+void init_game(struct gamestate *state)
 {
-    SDL_Surface *surf = SDL_GetWindowSurface(window);
+    // Create window and renderer
+    (*state).playing = 1;
+    int window_flags = SDL_WINDOW_OPENGL;// | SDL_WINDOW_RESIZABLE;
+    SDL_CreateWindowAndRenderer(WIDTH, HEIGHT, window_flags,
+				&(*state).window, &(*state).renderer);
+    SDL_SetWindowTitle(state->window, "It's Lit");
+}
+
+void gameloop(struct gamestate state)
+{
     struct timespec before, after;
     int loopCount = 0;
     while (1)
@@ -23,13 +33,17 @@ void gameloop(void)
                 break;
             }
         }
-        SDL_FillRect(surf,
-                     NULL,
-                     BACKGROUND_COLOR);
+	SDL_SetRenderDrawColor(state.renderer,
+			       BACKGROUND_R,
+			       BACKGROUND_G,
+			       BACKGROUND_B,
+			       BACKGROUND_A);
+	SDL_RenderClear(state.renderer);
 
 	// update window surface
+	draw_ui(state.renderer);
 	
-	SDL_UpdateWindowSurface(window);
+	SDL_RenderPresent(state.renderer);
 
 	if(clock_gettime(CLOCK_MONOTONIC, &after) == -1)
 	{
