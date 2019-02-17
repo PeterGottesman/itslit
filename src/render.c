@@ -4,7 +4,6 @@
 
 void render_placeable(SDL_Renderer *renderer, int x, int y);
 void render_light_source(SDL_Renderer *renderer, int x, int y);
-void render_ray(SDL_Renderer *renderer, int x1, int y1, int x2, int y2);
 
 void render_level(SDL_Renderer *renderer, level_t *level)
 {
@@ -51,10 +50,10 @@ void render_placeable(SDL_Renderer *renderer, int x, int y)
     SDL_RenderFillRect(renderer, &rect);
 }
 
-void render_ray(SDL_Renderer *renderer, int x1, int y1, int x2, int y2)
+void render_ray(SDL_Renderer *renderer, int x1, int y1, int x2, int y2, int trx, int try)
 {
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
-    point_t* dest_point = cast_ray(x1, y1, x2, y2);
+    point_t* dest_point = cast_ray(x1, y1, x2, y2, trx, try);
     SDL_RenderDrawLine(renderer, x1, y1, dest_point->x, dest_point->y);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
 

@@ -4,8 +4,9 @@
 #include <math.h>
 #include "defs.h"
 #include <stdbool.h>
+#include <SDL2/SDL.h>
 
-point_t* cast_ray(float x_src, float y_src, float x_dest, float y_dest) {
+point_t* cast_ray(float x_src, float y_src, float x_dest, float y_dest, int trx, int try) {
     float dx = x_dest - x_src;
     float dy = y_dest - y_src;
 
@@ -26,7 +27,7 @@ point_t* cast_ray(float x_src, float y_src, float x_dest, float y_dest) {
     float yn = y_src;
 
     while (1) {
-        if (xn < 0 || yn < 0 || xn > WIDTH || yn > HEIGHT)
+        if (xn < 0 || yn < 0 || xn > WIDTH || yn > HEIGHT || has_collided(trx, try, xn, yn))
             break;
         
         xn += dx;
@@ -46,7 +47,7 @@ float calculate_angle(float x_src, float y_src, float x_dest, float y_dest) {
 }
 
 point_t* compile_point(light_source_t* light_source, float x, float y) {
-    point_t* point = cast_ray(light_source->x, light_source->y, x, y);
+    point_t* point = cast_ray(light_source->x, light_source->y, x, y, 0, 0);
     point-> angle = calculate_angle(light_source->x, light_source->y, x, y);
     return point;
 }
