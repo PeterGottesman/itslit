@@ -11,6 +11,7 @@ struct gamestate
     SDL_Window *window;
     SDL_Renderer *renderer;
     level_t *cur_level;
+    placeable_t *selected;
 };
 
 void init_game(struct gamestate *state);
