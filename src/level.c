@@ -47,3 +47,10 @@ level_t* load_level(const char* filename) {
 
    return level;
 }
+
+void free_level(level_t* level) {
+    free(level->placeables);
+    free(level->light_sources);
+    free(level);
+    level = NULL;
+}
