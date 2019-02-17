@@ -18,8 +18,10 @@ level_t* load_level(const char* filename) {
     level->level_name = strdup(line);
     fgets(line, 100, fp);
     int light_source_count = atoi(line);
+    level->num_light_sources = light_source_count;
     fgets(line, 100, fp);
     int placeable_count = atoi(line);
+    level->num_placeables = placeable_count;
 
     level->light_sources = malloc(sizeof(light_source_t) * light_source_count);
 
