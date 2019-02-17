@@ -1,5 +1,5 @@
 EXE=ItsLit
-OBJS=src/main.c src/window.c src/game.c
+OBJS=$(wildcard src/*.c)
 
 CC=gcc
 FLAGS=-lSDL2 -g -O2
