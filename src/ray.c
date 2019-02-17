@@ -6,7 +6,7 @@
 #include <stdbool.h>
 #include <SDL2/SDL.h>
 
-point_t cast_ray(float x_src, float y_src, float x_dest, float y_dest, int trx, int try) {
+point_t cast_ray(level_t *level, float x_src, float y_src, float x_dest, float y_dest) {
     float dx = x_dest - x_src;
     float dy = y_dest - y_src;
 
@@ -27,16 +27,28 @@ point_t cast_ray(float x_src, float y_src, float x_dest, float y_dest, int trx, 
     float yn = y_src;
 
     while (1) {
-        if (xn < 0 || yn < 0 || xn > WIDTH || yn > HEIGHT || has_collided(trx, try, xn, yn))
+        if (xn < 0 || yn < 0 || xn > WIDTH || yn > GAME_HEIGHT)
+	{
             break;
+	}
+	
+	for (int i = 0; i < level->num_placeables; ++i) {
+	    SDL_Rect r;
+	    r.x = level->placeables[i].x;
+	    r.y = level->placeables[i].y;
+	    r.w = RENDERABLE_SIZE;
+	    r.h = RENDERABLE_SIZE;
+	    if (SDL_PointInRect(&(SDL_Point){.x = point.x, .y = point.y}, &r))
+	    {
+		return point;
+	    }
+	}
         
         xn += dx;
         yn += dy;
-    }
-
-    point.x = xn;
-    point.y = yn;
-    
+	point.x = xn;
+	point.y = yn;
+    }    
     return point;
 }
 
@@ -46,8 +58,8 @@ float calculate_angle(float x_src, float y_src, float x_dest, float y_dest) {
     return atan2(dy, dx);
 }
 
-point_t compile_point(light_source_t* light_source, float x, float y) {
-    point_t point = cast_ray(light_source->x, light_source->y, x, y, -30, -30);
+point_t compile_point(level_t *level, light_source_t* light_source, float x, float y) {
+    point_t point = cast_ray(level, light_source->x, light_source->y, x, y);
     point.angle = calculate_angle(light_source->x, light_source->y, x, y);
     return point;
 }
