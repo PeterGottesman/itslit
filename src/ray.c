@@ -6,17 +6,17 @@
 #include <stdbool.h>
 #include <SDL2/SDL.h>
 
-point_t* cast_ray(float x_src, float y_src, float x_dest, float y_dest, int trx, int try) {
+point_t cast_ray(float x_src, float y_src, float x_dest, float y_dest, int trx, int try) {
     float dx = x_dest - x_src;
     float dy = y_dest - y_src;
 
     float magnitude = sqrt(dx*dx + dy*dy);
 
-    point_t* point = malloc(sizeof(point_t));
+    point_t point;
 
     if (magnitude < 0.0001) {
-        point->x = x_src;
-        point->y = y_src;
+        point.x = x_src;
+        point.y = y_src;
         return point;
     }
 
@@ -34,8 +34,8 @@ point_t* cast_ray(float x_src, float y_src, float x_dest, float y_dest, int trx,
         yn += dy;
     }
 
-    point->x = xn;
-    point->y = yn;
+    point.x = xn;
+    point.y = yn;
     
     return point;
 }
@@ -46,9 +46,9 @@ float calculate_angle(float x_src, float y_src, float x_dest, float y_dest) {
     return atan2(dy, dx);
 }
 
-point_t* compile_point(light_source_t* light_source, float x, float y) {
-    point_t* point = cast_ray(light_source->x, light_source->y, x, y, 0, 0);
-    point-> angle = calculate_angle(light_source->x, light_source->y, x, y);
+point_t compile_point(light_source_t* light_source, float x, float y) {
+    point_t point = cast_ray(light_source->x, light_source->y, x, y, -30, -30);
+    point.angle = calculate_angle(light_source->x, light_source->y, x, y);
     return point;
 }
 
