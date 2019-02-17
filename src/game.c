@@ -2,6 +2,7 @@
 #include "defs.h"
 #include "ui.h"
 #include "game.h"
+#include "render.h"
 
 void init_game(struct gamestate *state)
 {
@@ -42,6 +43,8 @@ void gameloop(struct gamestate state)
 
 	// update window surface
 	draw_ui(state.renderer);
+
+	render_level(state.renderer, state.cur_level);
 	
 	SDL_RenderPresent(state.renderer);
 
