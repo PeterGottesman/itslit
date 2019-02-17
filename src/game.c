@@ -89,6 +89,12 @@ void gameloop(struct gamestate state)
 		point_t* tr = compile_point(&state.cur_level->light_sources[0], lsx + RENDERABLE_SIZE, lsy);
 		point_t* br = compile_point(&state.cur_level->light_sources[0], lsx + RENDERABLE_SIZE, lsy + RENDERABLE_SIZE);
 		point_t* bl = compile_point(&state.cur_level->light_sources[0], lsx, lsy + RENDERABLE_SIZE);
+		
+
+		render_ray(state.renderer, lsx, lsy, 0, 0, -30, -30);
+		render_ray(state.renderer, lsx, lsy, WIDTH, GAME_HEIGHT, -30, -30);
+		render_ray(state.renderer, lsx, lsy, 0, GAME_HEIGHT, -30, -30);
+		render_ray(state.renderer, lsx, lsy, WIDTH, 0, -30, -30);
 
 		// render_ray(state.renderer, lsx, lsy, tl[0].x, tl[0].y);
 		// render_ray(state.renderer, lsx, lsy, tl[1].x, tl[1].y);
