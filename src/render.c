@@ -47,7 +47,7 @@ void render_placeable(SDL_Renderer *renderer, int x, int y)
     rect.y = y;
     rect.w = RENDERABLE_SIZE;
     rect.h = RENDERABLE_SIZE;
-    SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
+    SDL_SetRenderDrawColor(renderer, 0xc1, 0x4a, 0x09, 0xff);
     SDL_RenderFillRect(renderer, &rect);
 }
 
@@ -97,7 +97,7 @@ void render_shadows(SDL_Renderer *renderer, level_t *level)
 	    xs[2] = ls->x;
 	    ys[2] = ls->y;
 	
-	    filledPolygonRGBA(renderer, xs, ys, 3, 0xd9, 0xf4, 0x0e, 0x10);
+	    filledPolygonRGBA(renderer, xs, ys, 3, 0xd9, 0xf4, 0x0e, 0x30);
 	}
     }
 }

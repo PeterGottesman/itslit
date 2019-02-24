@@ -3,8 +3,8 @@ Deboe's Realm
 3
 100
 100
-200
-200
+500
+300
 square
 square
 square
